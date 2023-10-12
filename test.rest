@@ -3,3 +3,5 @@
 GET https://localhost:4000/profile/4rivappa
 
 ###
+
+GET https://localhost:4000/github/4rivappa

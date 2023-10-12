@@ -2,34 +2,18 @@ const express = require('express')
 const axios = require('axios')
 const router = express.Router()
 
-const instance = axios.create();
-
-instance.interceptors.request.use(function (config) {
-  console.log('Request Details:');
-  console.log('Request Method:', config.method);
-  console.log('Request URL:', config.url);
-  console.log('Request Headers:', config.headers);
-  console.log('Request Data:', config.data);
-  console.log('---------------------------------');
-  console.log(config);
-  return config;
-});
-
-
 router.get('/:username', (req, res) => {
     res.json({message: 'success', data: req.data })
 })
 
 router.param("username", async (req, res, next, username) => {
     try {
-        const API_KEY = process.env.MONKEYTYPE_APEKEY;
-        const response = await instance.get(`https://api.monkeytype.com/users/${username}/profile`, {
+        const response = await axios.get(`https://api.github.com/users/${username}`, {
             headers: {
-                Authorization: `ApeKey ${API_KEY}`,
                 'Accept-Encoding': 'gzip, deflate, br'
             },
         })
-
+        
         if (response.status === 200) {
             const userData = response.data;
             req.data = userData;
