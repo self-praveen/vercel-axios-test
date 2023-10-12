@@ -8,7 +8,13 @@ router.get('/:username', (req, res) => {
 
 router.param("username", async (req, res, next, username) => {
     try {
-        const response = await axios.get(`https://api.github.com/users/${username}`, {
+        // const response = await axios.get(`https://api.github.com/users/${username}`, {
+        //     headers: {
+        //         'Accept-Encoding': 'gzip, deflate, br'
+        //     },
+        // })
+
+        const response = await axios.get(`https://api.monkeytype.com/users/${username}/profile`, {
             headers: {
                 'Accept-Encoding': 'gzip, deflate, br'
             },
