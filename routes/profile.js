@@ -23,7 +23,8 @@ router.get('/:username', (req, res) => {
 router.param("username", async (req, res, next, username) => {
     try {
         const API_KEY = process.env.MONKEYTYPE_APEKEY;
-        const response = await instance.get(`https://api.monkeytype.com/users/${username}/profile`, {
+        const url = `https://api.monkeytype.com/users/${username}/profile`
+        const response = await instance.get(url, {
             headers: {
                 Authorization: `ApeKey ${API_KEY}`,
                 'Accept-Encoding': 'gzip, deflate, br'
